@@ -12,7 +12,8 @@ class ActivityWorkoutViewModel: ObservableObject {
     
     private var activityWorkoutService: ActivityWorkoutService
     @Published var distance: String?
-    
+    @Published var workoutTime: String?
+    @Published var pace: String?
     
     init(activityWorkoutService: ActivityWorkoutService) {
         self.activityWorkoutService = activityWorkoutService
@@ -36,6 +37,14 @@ class ActivityWorkoutViewModel: ObservableObject {
 extension ActivityWorkoutViewModel: WorkoutUpdatedDelegate {
     func workoutDidUpdate(workout: Workout) {
         self.distance = FormatDisplay.distance(workout.distance)
+        let workoutDuration = workout.startTime.timeIntervalSinceNow * -1
+        
+        let formattedTime = FormatDisplay.time(Int(workoutDuration))
+        self.workoutTime = formattedTime
+        
+        let formattedPace = FormatDisplay.pace(distance: workout.distance, seconds: Int(workoutDuration), outputUnit: UnitSpeed.minutesPerMile)
+        self.pace = formattedPace
+        
     }
     
 }

@@ -45,6 +45,10 @@ class LocationManager: NSObject{
             }
         })
     }
+    
+    func stopUpdatingLocation() {
+        self.locationManager.stopUpdatingLocation()
+    }
 }
 
 extension LocationManager: CLLocationManagerDelegate {

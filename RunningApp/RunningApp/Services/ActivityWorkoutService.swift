@@ -26,13 +26,17 @@ class ActivityWorkoutService {
     
     func startWorkout(){
         activityWorkoutRepo.startWorkout()
+        guard timer == nil else { return }
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             self.updateWorkout()
         }
         workout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date())
     }
+    
     func stopWorkout(){
-        print("Workout Stopped")
+        activityWorkoutRepo.stopWorkout()
+        timer?.invalidate()
+        timer = nil
     }
     func pauseWorkout(){
         print("Workout Paused")
