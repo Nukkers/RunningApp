@@ -13,15 +13,38 @@ struct ActivityWorkoutView: View {
     var distance: String {
         activityWorkoutVM.distance ?? "0 mi"
     }
+    var time: String {
+        activityWorkoutVM.workoutTime ?? "0:00:00"
+    }
+    var pace: String {
+        activityWorkoutVM.pace ?? "0"
+    }
+    
+    @State private var didTapStartWorkoutBtn: Bool = false
+    
     var body: some View {
         VStack{
             Text("Distance:  \(self.distance)").font(.largeTitle).padding()
-            Text("Time").font(.largeTitle).padding()
-            Button(action: {
-                activityWorkoutVM.startWorkout()
-            }, label: {
-                Text("Start Workout")
-            }).font(.largeTitle).padding().foregroundColor(.green)
+            Text("Time: \(self.time)").font(.largeTitle).padding()
+            Text("Pace: \(self.pace)").font(.largeTitle).padding()
+            
+            if(didTapStartWorkoutBtn == false) {
+                Button(action: {
+                    activityWorkoutVM.startWorkout()
+                    self.didTapStartWorkoutBtn = true
+                }, label: {
+                    Text("Start Workout").foregroundColor(Color.green)
+                }).font(.largeTitle).padding()
+            }
+            
+            if(didTapStartWorkoutBtn == true) {
+                Button(action: {
+                    activityWorkoutVM.stopWorkout()
+                    didTapStartWorkoutBtn = false
+                }, label: {
+                    Text("Stop Workout")
+                }).font(.largeTitle).padding()
+            }
         }
     }
 }

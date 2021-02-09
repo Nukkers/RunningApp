@@ -19,5 +19,9 @@ class ActivityWorkoutRepository {
     func startWorkout() {
         locationManager = LocationManager()
     }
+    
+    func stopWorkout() {
+        locationManager?.stopUpdatingLocation()
+    }
 }
 
