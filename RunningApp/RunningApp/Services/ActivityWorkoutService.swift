@@ -18,10 +18,12 @@ class ActivityWorkoutService {
     private var timer: Timer?
     
     private var workout: Workout?
+    private var workoutManager: WorkoutManager? // Change this. It should be telling the repo to add new workouts
     weak var workoutUpdatedDelegate: WorkoutUpdatedDelegate?
     
     init(activityWorkoutRepo: ActivityWorkoutRepository) {
         self.activityWorkoutRepo = activityWorkoutRepo
+        self.workoutManager = WorkoutManager()
     }
     
     func startWorkout(){
@@ -35,13 +37,18 @@ class ActivityWorkoutService {
     
     func stopWorkout(){
         activityWorkoutRepo.stopWorkout()
+        
         timer?.invalidate()
         timer = nil
+        
+        guard let workout = workout else { return }
+        print("Workout Duration: \(workout.startTime.timeIntervalSinceNow * -1)")
+        self.workoutManager?.add(workout)
     }
+    
     func pauseWorkout(){
         print("Workout Paused")
     }
-    
     
     private func updateWorkout() {
         guard let workout = workout else { return }
