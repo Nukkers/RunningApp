@@ -11,8 +11,10 @@ struct TabBarView: View {
     var body: some View {
         
         let activityWorkoutRepo = ActivityWorkoutRepository()
+        let timerWrapper = TimerWrapper()
+        let workoutManager = WorkoutManager()
 
-        let activityWorkoutService = ActivityWorkoutService(activityWorkoutRepo: activityWorkoutRepo)
+        let activityWorkoutService = ActivityWorkoutService(activityWorkoutRepo: activityWorkoutRepo, timerWrapper: timerWrapper, workoutManager: workoutManager)
         
         let activityWorkoutVM = ActivityWorkoutViewModel(activityWorkoutService: activityWorkoutService)
         

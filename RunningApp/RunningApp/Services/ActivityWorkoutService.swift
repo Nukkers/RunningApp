@@ -11,39 +11,43 @@ protocol WorkoutUpdatedDelegate: class {
     func workoutDidUpdate(workout: Workout)
 }
 
+//protocol ActivityWorkoutServiceProtocol {
+//
+//}
+
 class ActivityWorkoutService {
     
     private var activityWorkoutRepo: ActivityWorkoutRepository
     
-    private var timer: Timer?
+    private let timer: TimerWrapperProtocol
     
-    private var workout: Workout?
-    private var workoutManager: WorkoutManager? // Change this. It should be telling the repo to add new workouts
+    private var workout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date())
+    
+    private var workoutManager: WorkoutManager
+    
     weak var workoutUpdatedDelegate: WorkoutUpdatedDelegate?
     
-    init(activityWorkoutRepo: ActivityWorkoutRepository) {
+    init(activityWorkoutRepo: ActivityWorkoutRepository, timerWrapper: TimerWrapperProtocol, workoutManager: WorkoutManager) {
         self.activityWorkoutRepo = activityWorkoutRepo
-        self.workoutManager = WorkoutManager()
+        self.workoutManager = workoutManager
+        timer = timerWrapper
     }
     
     func startWorkout(){
+        workout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date())
         activityWorkoutRepo.startWorkout()
-        guard timer == nil else { return }
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+        timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {
             self.updateWorkout()
         }
-        workout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date())
+        
     }
     
     func stopWorkout(){
         activityWorkoutRepo.stopWorkout()
         
-        timer?.invalidate()
-        timer = nil
+        timer.endTimer()
         
-        guard let workout = workout else { return }
-        print("Workout Duration: \(workout.startTime.timeIntervalSinceNow * -1)")
-        self.workoutManager?.add(workout)
+        workoutManager.add(workout)
     }
     
     func pauseWorkout(){
@@ -51,7 +55,6 @@ class ActivityWorkoutService {
     }
     
     private func updateWorkout() {
-        guard let workout = workout else { return }
         workout.distance = activityWorkoutRepo.distance
         workoutUpdatedDelegate?.workoutDidUpdate(workout: workout)
     }

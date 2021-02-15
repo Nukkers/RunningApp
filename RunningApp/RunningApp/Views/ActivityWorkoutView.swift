@@ -52,7 +52,9 @@ struct ActivityWorkoutView: View {
 struct ActivityWorkoutView_Previews: PreviewProvider {
     
     static let activityWorkoutRepo = ActivityWorkoutRepository()
-    static let activityWorkoutService = ActivityWorkoutService(activityWorkoutRepo: activityWorkoutRepo)
+    static let timerWrapper = TimerWrapper()
+    static let workoutManager = WorkoutManager()
+    static let activityWorkoutService = ActivityWorkoutService(activityWorkoutRepo: activityWorkoutRepo, timerWrapper: timerWrapper, workoutManager: workoutManager)
     static var activityWorkoutVM = ActivityWorkoutViewModel(activityWorkoutService: activityWorkoutService)
     static var previews: some View {
         ActivityWorkoutView(activityWorkoutVM: activityWorkoutVM)
