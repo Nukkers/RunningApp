@@ -11,17 +11,13 @@ protocol WorkoutUpdatedDelegate: class {
     func workoutDidUpdate(workout: Workout)
 }
 
-//protocol ActivityWorkoutServiceProtocol {
-//
-//}
-
 class ActivityWorkoutService {
     
     private var activityWorkoutRepo: ActivityWorkoutRepository
     
     private let timer: TimerWrapperProtocol
-    
-    private var workout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date())
+        
+    private var workout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date(), locationCoords: [], placemark: "", location: WorkoutLocation(lat: 0, long: 0))
     
     private var workoutManager: WorkoutManager
     
@@ -34,7 +30,7 @@ class ActivityWorkoutService {
     }
     
     func startWorkout(){
-        workout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date())
+        workout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date(), locationCoords: [], placemark: "", location: WorkoutLocation(lat: 0, long: 0))
         activityWorkoutRepo.startWorkout()
         timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {
             self.updateWorkout()
@@ -47,6 +43,8 @@ class ActivityWorkoutService {
         
         timer.endTimer()
         
+        
+        
         workoutManager.add(workout)
     }
     
@@ -56,6 +54,10 @@ class ActivityWorkoutService {
     
     private func updateWorkout() {
         workout.distance = activityWorkoutRepo.distance
+        workout.locationCoord = activityWorkoutRepo.locationCoord
+        workout.location = activityWorkoutRepo.location
+        workout.placemark = activityWorkoutRepo.placemark?.description
+        
         workoutUpdatedDelegate?.workoutDidUpdate(workout: workout)
     }
 }
