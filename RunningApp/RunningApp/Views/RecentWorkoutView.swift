@@ -33,13 +33,16 @@ struct Home: View {
     }
     
     var body: some View{
-        
-        List(workouts) { workout in
-            let duration = workout.startTime.timeIntervalSinceNow * -1
-            Text("Distance: \(FormatDisplay.distance(workout.distance))")
-            Text("Time: \(FormatDisplay.time(Int(duration)))")
-            
-        }.padding(.top, 60).onAppear(perform: recentWorkoutVm.getAllRecentWorkouts)
+        NavigationView {
+            List(workouts) { workout in
+                NavigationLink(destination: DetailWorkoutView(workout: workout)) {
+                    let duration = workout.startTime.timeIntervalSinceNow * -1
+                    Text("Distance: \(FormatDisplay.distance(workout.distance))")
+                    Text("Time: \(FormatDisplay.time(Int(duration)))")
+                }
+            }.padding(.top, 60).onAppear(perform: recentWorkoutVm.getAllRecentWorkouts)
+            .navigationBarTitle("Workouts", displayMode: .large)
+        }
     }
 }
 
