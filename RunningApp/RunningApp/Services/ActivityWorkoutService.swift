@@ -17,7 +17,7 @@ class ActivityWorkoutService {
     
     private let timer: TimerWrapperProtocol
         
-    private var workout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date(), locationCoords: [], placemark: "", location: WorkoutLocation(lat: 0, long: 0))
+    private var workout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date(), endTime: Date(), locationCoords: [], placemark: "", location: WorkoutLocation(lat: 0, long: 0))
     
     private var workoutManager: WorkoutManager
     
@@ -30,7 +30,7 @@ class ActivityWorkoutService {
     }
     
     func startWorkout(){
-        workout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date(), locationCoords: [], placemark: "", location: WorkoutLocation(lat: 0, long: 0))
+        workout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date(), endTime: Date(), locationCoords: [], placemark: "", location: WorkoutLocation(lat: 0, long: 0))
         activityWorkoutRepo.startWorkout()
         timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {
             self.updateWorkout()
@@ -41,9 +41,10 @@ class ActivityWorkoutService {
     func stopWorkout(){
         activityWorkoutRepo.stopWorkout()
         
+        let endTime = Date()
+        workout.endTime = endTime
+        
         timer.endTimer()
-        
-        
         
         workoutManager.add(workout)
     }

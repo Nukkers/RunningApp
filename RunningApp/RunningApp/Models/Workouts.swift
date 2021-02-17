@@ -10,18 +10,19 @@ import Foundation
 class Workout: Identifiable, Codable {
     var distance: Measurement<UnitLength>
     var startTime: Date
+    var endTime: Date
     var locationCoord: [WorkoutLocation] = []
     var location: WorkoutLocation?
     var placemark: String?
     
-    init(distance: Measurement<UnitLength>, startTime: Date, locationCoords: [WorkoutLocation], placemark: String,
+    init(distance: Measurement<UnitLength>, startTime: Date, endTime: Date, locationCoords: [WorkoutLocation], placemark: String,
          location: WorkoutLocation) {
         self.distance = distance
         self.startTime = startTime
+        self.endTime = endTime
         self.locationCoord = locationCoords
         self.placemark = placemark
         self.location = location
-        
     }
 }
 

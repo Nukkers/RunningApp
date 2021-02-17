@@ -32,7 +32,7 @@ struct DetailWorkoutView: View {
 }
 
 struct DetailWorkoutView_Previews: PreviewProvider {
-    static let exampleWorkout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date(), locationCoords: [], placemark: "", location: WorkoutLocation(lat: 0, long: 0))
+    static let exampleWorkout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date(), endTime: Date(), locationCoords: [], placemark: "", location: WorkoutLocation(lat: 0, long: 0))
     static var previews: some View {
         DetailWorkoutView(workout: exampleWorkout)
     }

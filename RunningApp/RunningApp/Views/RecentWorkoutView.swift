@@ -36,7 +36,7 @@ struct Home: View {
         NavigationView {
             List(workouts) { workout in
                 NavigationLink(destination: DetailWorkoutView(workout: workout)) {
-                    let duration = workout.startTime.timeIntervalSinceNow * -1
+                    let duration = workout.endTime.distance(to: workout.startTime)
                     Text("Distance: \(FormatDisplay.distance(workout.distance))")
                     Text("Time: \(FormatDisplay.time(Int(duration)))")
                 }

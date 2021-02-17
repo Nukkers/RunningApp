@@ -15,7 +15,6 @@ class RecentWorkoutViewModel: ObservableObject {
     init(recentWorkoutService: RecentWorkoutService) {
         self.recentWorkoutService = recentWorkoutService
         recentWorkoutService.recentWorkoutAddedDelegate = self
-//        getAllRecentWorkouts()
     }
     
     func getAllRecentWorkouts() {
