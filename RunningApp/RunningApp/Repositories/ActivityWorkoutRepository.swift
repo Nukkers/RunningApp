@@ -15,11 +15,29 @@ protocol ActivityWorkoutRepositoryProtocol {
 
 class ActivityWorkoutRepository: ActivityWorkoutRepositoryProtocol {
     var locationManager: LocationManager?
+    let locationManagerAdapter = LocationManagerAdapter()
     
-    
-//    private var locationManager: LocationManager?
     var distance: Measurement<UnitLength> {
         locationManager?.distance ?? Measurement(value: 0, unit: UnitLength.meters)
+    }
+    
+    var locationCoord: [WorkoutLocation] {
+        
+        guard let locationList = locationManager?.locationList else { return []}
+        
+        return locationManagerAdapter.convertCLLocationToWorkoutLocation(cllocations: locationList)
+    }
+    
+    var location: WorkoutLocation? {
+        
+        guard let location = locationManager?.location else { return nil}
+        
+        return locationManagerAdapter.convertLocationToWorkoutLocation(location: location)
+    }
+    
+    var placemark: String? {
+        guard let placemark = locationManager?.placemark else { return nil }
+        return locationManagerAdapter.convertPlacemark(place: placemark)
     }
     
     init() {}
@@ -32,4 +50,3 @@ class ActivityWorkoutRepository: ActivityWorkoutRepositoryProtocol {
         locationManager?.stopUpdatingLocation()
     }
 }
-
