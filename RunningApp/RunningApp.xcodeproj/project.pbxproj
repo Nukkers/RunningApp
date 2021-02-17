@@ -31,6 +31,9 @@
 		4EB1AAB825D69FEE006E379D /* TimerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1AAB725D69FEE006E379D /* TimerWrapper.swift */; };
 		4EB1AABD25D6A100006E379D /* ActivityWorkoutServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB1AABC25D6A100006E379D /* ActivityWorkoutServiceTests.swift */; };
 		4EB6672A25DA85D800B7826B /* DetailWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EB6672925DA85D800B7826B /* DetailWorkoutView.swift */; };
+		4EC4458A25DD204600259C05 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC4458925DD204600259C05 /* MapView.swift */; };
+		4EC4458F25DD20FF00259C05 /* WorkoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC4458E25DD20FF00259C05 /* WorkoutManager.swift */; };
+		4EC4459425DD22A400259C05 /* LocationManagerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC4459325DD22A400259C05 /* LocationManagerAdapter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +84,9 @@
 		4EB1AAB725D69FEE006E379D /* TimerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerWrapper.swift; sourceTree = "<group>"; };
 		4EB1AABC25D6A100006E379D /* ActivityWorkoutServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityWorkoutServiceTests.swift; sourceTree = "<group>"; };
 		4EB6672925DA85D800B7826B /* DetailWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWorkoutView.swift; sourceTree = "<group>"; };
+		4EC4458925DD204600259C05 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		4EC4458E25DD20FF00259C05 /* WorkoutManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutManager.swift; sourceTree = "<group>"; };
+		4EC4459325DD22A400259C05 /* LocationManagerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManagerAdapter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +215,8 @@
 				4E7E89F425CABAC00099655A /* Formatter.swift */,
 				4E7E89F925CABB060099655A /* UnitConverter.swift */,
 				4EB1AAB725D69FEE006E379D /* TimerWrapper.swift */,
+				4EC4458E25DD20FF00259C05 /* WorkoutManager.swift */,
+				4EC4459325DD22A400259C05 /* LocationManagerAdapter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -228,6 +236,7 @@
 				4E7E8A1425CABDC40099655A /* ActivityWorkoutView.swift */,
 				4EB1AAA325D53CBF006E379D /* TabBarView.swift */,
 				4EB6672925DA85D800B7826B /* DetailWorkoutView.swift */,
+				4EC4458925DD204600259C05 /* MapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -368,9 +377,12 @@
 				4EB1AA9A25D3EDC6006E379D /* RecentWorkoutService.swift in Sources */,
 				4EB1AA9225D3ECD2006E379D /* RecentWorkoutViewModel.swift in Sources */,
 				4E7E8A0925CABB6F0099655A /* ActivityWorkoutRepository.swift in Sources */,
+				4EC4459425DD22A400259C05 /* LocationManagerAdapter.swift in Sources */,
 				4E7E8A5425CAE8F10099655A /* Workouts.swift in Sources */,
 				4E7E89F525CABAC00099655A /* Formatter.swift in Sources */,
+				4EC4458A25DD204600259C05 /* MapView.swift in Sources */,
 				4EB1AA9F25D3F0E0006E379D /* RecentWorkoutRepository.swift in Sources */,
+				4EC4458F25DD20FF00259C05 /* WorkoutManager.swift in Sources */,
 				4E7E89FA25CABB060099655A /* UnitConverter.swift in Sources */,
 				4EB6672A25DA85D800B7826B /* DetailWorkoutView.swift in Sources */,
 				4E7E8A1525CABDC40099655A /* ActivityWorkoutView.swift in Sources */,
