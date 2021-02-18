@@ -8,13 +8,16 @@
 import Foundation
 
 protocol ActivityWorkoutRepositoryProtocol {
-    var locationManager: LocationManager? { get set }
+    var distance: Measurement<UnitLength> { get }
+    var locationCoord: [WorkoutLocation] { get }
+    var location: WorkoutLocation? { get }
+    var placemark: String? { get }
     func startWorkout()
     func stopWorkout()
 }
 
 class ActivityWorkoutRepository: ActivityWorkoutRepositoryProtocol {
-    var locationManager: LocationManager?
+    private var locationManager: LocationManagerProtocol?
     let locationManagerAdapter = LocationManagerAdapter()
     
     var distance: Measurement<UnitLength> {
@@ -40,13 +43,17 @@ class ActivityWorkoutRepository: ActivityWorkoutRepositoryProtocol {
         return locationManagerAdapter.convertPlacemark(place: placemark)
     }
     
-    init() {}
+    init(locationManager: LocationManagerProtocol) {
+        self.locationManager = locationManager
+    }
     
     func startWorkout() {
-        locationManager = LocationManager()
+        guard let locationManager = locationManager else { return }
+        locationManager.startUpdatingLocation()
     }
     
     func stopWorkout() {
-        locationManager?.stopUpdatingLocation()
+        guard let locationManager = locationManager else { return }
+        locationManager.stopUpdatingLocation()
     }
 }

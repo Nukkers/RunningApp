@@ -11,7 +11,8 @@ import CoreLocation
 class LocationManagerAdapter {
     
     func convertPlacemark(place: CLPlacemark) -> String  {
-        return place.description
+        guard let place = place.name else { return "" }
+        return place
     }
     
     func convertCLLocationToWorkoutLocation(cllocations: [CLLocation]) -> [WorkoutLocation] {

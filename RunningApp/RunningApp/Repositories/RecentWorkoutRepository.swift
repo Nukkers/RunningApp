@@ -8,7 +8,7 @@
 import Foundation
 
 class RecentWorkoutRepository {
-    private var workoutManager: WorkoutManager?
+    private var workoutManager: UserDefaultsWorkoutStorageRepo?
     var workouts: [Workout] {
         workoutManager?.load() ?? []
     }
@@ -16,7 +16,7 @@ class RecentWorkoutRepository {
     init() {}
     
     func loadWorkouts() {
-        workoutManager = WorkoutManager()
+        workoutManager = UserDefaultsWorkoutStorageRepo()
     }
     
 }

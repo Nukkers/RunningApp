@@ -50,10 +50,10 @@ struct ActivityWorkoutView: View {
 }
 
 struct ActivityWorkoutView_Previews: PreviewProvider {
-    
-    static let activityWorkoutRepo = ActivityWorkoutRepository()
+    static let locationManager = LocationManager()
+    static let activityWorkoutRepo = ActivityWorkoutRepository(locationManager: locationManager)
     static let timerWrapper = TimerWrapper()
-    static let workoutManager = WorkoutManager()
+    static let workoutManager = UserDefaultsWorkoutStorageRepo()
     static let activityWorkoutService = ActivityWorkoutService(activityWorkoutRepo: activityWorkoutRepo, timerWrapper: timerWrapper, workoutManager: workoutManager)
     static var activityWorkoutVM = ActivityWorkoutViewModel(activityWorkoutService: activityWorkoutService)
     static var previews: some View {

@@ -10,7 +10,7 @@ import Foundation
 class RecentWorkoutViewModel: ObservableObject {
     
     private let recentWorkoutService: RecentWorkoutService
-    @Published var workouts: [Workout]?
+    @Published var workouts: [Workout] = []
     
     init(recentWorkoutService: RecentWorkoutService) {
         self.recentWorkoutService = recentWorkoutService
@@ -19,6 +19,18 @@ class RecentWorkoutViewModel: ObservableObject {
     
     func getAllRecentWorkouts() {
         recentWorkoutService.getRecentWorkouts()
+    }
+    
+    func formatDistance(workout: Workout) -> String {
+        return FormatDisplay.distance(workout.distance)
+    }
+    
+    func formatWorkoutDuration(workout: Workout) -> String {
+        return FormatDisplay.WorkoutDuration(workout: workout)
+    }
+    
+    func formatPlacemark(workout: Workout) -> String {
+        return FormatDisplay.placemark(workout: workout)
     }
     
 }

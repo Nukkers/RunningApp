@@ -13,17 +13,17 @@ protocol WorkoutUpdatedDelegate: class {
 
 class ActivityWorkoutService {
     
-    private var activityWorkoutRepo: ActivityWorkoutRepository
+    private var activityWorkoutRepo: ActivityWorkoutRepositoryProtocol
     
     private let timer: TimerWrapperProtocol
         
     private var workout = Workout(distance: Measurement(value: 0, unit: UnitLength.meters), startTime: Date(), endTime: Date(), locationCoords: [], placemark: "", location: WorkoutLocation(lat: 0, long: 0))
     
-    private var workoutManager: WorkoutManager
+    private var workoutManager: UserDefaultsWorkoutStorageRepo
     
     weak var workoutUpdatedDelegate: WorkoutUpdatedDelegate?
     
-    init(activityWorkoutRepo: ActivityWorkoutRepository, timerWrapper: TimerWrapperProtocol, workoutManager: WorkoutManager) {
+    init(activityWorkoutRepo: ActivityWorkoutRepositoryProtocol, timerWrapper: TimerWrapperProtocol, workoutManager: UserDefaultsWorkoutStorageRepo) {
         self.activityWorkoutRepo = activityWorkoutRepo
         self.workoutManager = workoutManager
         timer = timerWrapper
