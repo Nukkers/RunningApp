@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct TabBarView: View {
+    
     var body: some View {
-        
-        let activityWorkoutRepo = ActivityWorkoutRepository()
+        let locationManager = LocationManager()
+        let activityWorkoutRepo = ActivityWorkoutRepository(locationManager: locationManager)
         let timerWrapper = TimerWrapper()
-        let workoutManager = WorkoutManager()
+        let workoutManager = UserDefaultsWorkoutStorageRepo()
 
         let activityWorkoutService = ActivityWorkoutService(activityWorkoutRepo: activityWorkoutRepo, timerWrapper: timerWrapper, workoutManager: workoutManager)
         
