@@ -16,9 +16,11 @@ class ActivityWorkoutViewModelTests: XCTestCase {
     var stubActivityWorkoutRepo: StubActivityWorkoutRepository!
     var stubTimerWrapper: StubTimerWrapper!
     var stubWorkoutManager: StubWorkoutManager!
+    var stubLocationManagerProtocol: StubLocationManagerProtocol!
     
     override func setUp() {
-        stubActivityWorkoutRepo = StubActivityWorkoutRepository()
+        stubLocationManagerProtocol = StubLocationManagerProtocol()
+        stubActivityWorkoutRepo = StubActivityWorkoutRepository(locationManager: stubLocationManagerProtocol)
         stubTimerWrapper = StubTimerWrapper()
         stubWorkoutManager = StubWorkoutManager()
         
@@ -44,7 +46,7 @@ class ActivityWorkoutViewModelTests: XCTestCase {
     
     func testWorkoutUpdatedDelegateFormatsNewWorkoutObject() {
         let expectedDistance = Measurement(value: 0, unit: UnitLength.meters)
-        let expectedWorkout = Workout(distance: expectedDistance, startTime: Date())
+        let expectedWorkout = Workout(distance: expectedDistance, startTime: Date(), endTime: Date(), locationCoords: [], placemark: "", location: WorkoutLocation(lat: 0, long: 0))
         
         let formattedDistance = FormatDisplay.distance(expectedDistance)
         
