@@ -41,6 +41,15 @@ struct FormatDisplay {
         formatter.dateStyle = .medium
         return formatter.string(from: timestamp)
     }
+    
+    static func WorkoutDuration(workout: Workout) -> String {
+        let duration = workout.endTime.distance(to: workout.startTime)
+        return FormatDisplay.time(Int(duration))
+    }
+    
+    static func placemark(workout: Workout) -> String {
+        return workout.placemark ?? ""
+    }
 }
 
 extension UnitSpeed {
