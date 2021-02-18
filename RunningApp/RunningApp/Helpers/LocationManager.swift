@@ -8,7 +8,21 @@
 import Foundation
 import CoreLocation
 
-class LocationManager: NSObject{
+protocol LocationManagerProtocol {
+    func startUpdatingLocation()
+    func stopUpdatingLocation()
+    func geocode()
+    
+    var distance: Measurement<UnitLength> { get }
+    var locationList: [CLLocation] { get }
+    var location: CLLocation? { get }
+    var placemark: CLPlacemark? { get }
+    var locationManager: CLLocationManager { get }
+    
+}
+
+class LocationManager: NSObject, LocationManagerProtocol{
+    
     let locationManager: CLLocationManager
     private let geocoder = CLGeocoder()
     
@@ -21,7 +35,9 @@ class LocationManager: NSObject{
     override init() {
         locationManager = CLLocationManager()
         super.init()
-        
+    }
+    
+    func startUpdatingLocation() {
         locationManager.delegate = self
         
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -35,7 +51,11 @@ class LocationManager: NSObject{
         locationManager.startUpdatingLocation()
     }
     
-    private func geocode() {
+    func stopUpdatingLocation() {
+        self.locationManager.stopUpdatingLocation()
+    }
+    
+    internal func geocode() {
         guard let location = self.location else { return }
         geocoder.reverseGeocodeLocation(location, completionHandler: { (places, error) in
             if error == nil {
@@ -46,9 +66,6 @@ class LocationManager: NSObject{
         })
     }
     
-    func stopUpdatingLocation() {
-        self.locationManager.stopUpdatingLocation()
-    }
 }
 
 extension LocationManager: CLLocationManagerDelegate {
