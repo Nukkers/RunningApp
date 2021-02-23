@@ -1,30 +1,14 @@
 //
-//  Workout.swift
+//  WorkoutManager.swift
 //  RunningApp
 //
-//  Created by Naukhez Ali on 03/02/2021.
+//  Created by Naukhez Ali on 17/02/2021.
 //
 
 import Foundation
-import Combine
 
-class Workout: Identifiable, Codable {
-    var startTime: Date
-    var distance: Measurement<UnitLength>
-    
-    init(distance: Measurement<UnitLength>, startTime: Date) {
-        self.distance = distance
-        self.startTime = startTime
-    }
-}
+class UserDefaultsWorkoutStorageRepo {
 
-class WorkoutManager: ObservableObject {
-    //    var locationCoord: [CLLocation]
-    //    var placemark: String
-    //    var location: CLLocation
-    //    var status: CLAuthorizationStatus
-    //    @Published var distance: Measurement<UnitLength>
-    //    var startTime: Date
     var workouts: [Workout]
     static let saveKey = "SavedData"
     

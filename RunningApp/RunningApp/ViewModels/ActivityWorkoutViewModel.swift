@@ -37,8 +37,8 @@ class ActivityWorkoutViewModel: ObservableObject {
 extension ActivityWorkoutViewModel: WorkoutUpdatedDelegate {
     func workoutDidUpdate(workout: Workout) {
         self.distance = FormatDisplay.distance(workout.distance)
-        let workoutDuration = workout.startTime.timeIntervalSinceNow * -1
         
+        let workoutDuration = workout.startTime.timeIntervalSinceNow * -1
         let formattedTime = FormatDisplay.time(Int(workoutDuration))
         self.workoutTime = formattedTime
         

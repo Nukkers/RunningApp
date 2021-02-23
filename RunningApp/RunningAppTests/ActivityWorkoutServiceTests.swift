@@ -14,10 +14,12 @@ class ActivityWorkoutServiceTests: XCTestCase {
     var stubActivityWorkoutRepo: StubActivityWorkoutRepository!
     var stubWorkoutUpdatedDelegate: StubWorkoutUpdatedDelegate!
     var stubWorkoutManager: StubWorkoutManager!
+    var stubLocationManagerProtocol: StubLocationManagerProtocol!
     var activityService: ActivityWorkoutService!
     
     override func setUp() {
-        stubActivityWorkoutRepo = StubActivityWorkoutRepository()
+        stubLocationManagerProtocol = StubLocationManagerProtocol()
+        stubActivityWorkoutRepo = StubActivityWorkoutRepository(locationManager: stubLocationManagerProtocol)
         stubTimerWrapper = StubTimerWrapper()
         stubWorkoutUpdatedDelegate = StubWorkoutUpdatedDelegate()
         stubWorkoutManager = StubWorkoutManager()
@@ -126,7 +128,7 @@ class StubTimerWrapper: TimerWrapper {
     }
 }
 
-class StubWorkoutManager: WorkoutManager {
+class StubWorkoutManager: UserDefaultsWorkoutStorageRepo {
 
     var invokedWorkoutsSetter = false
     var invokedWorkoutsSetterCount = 0
